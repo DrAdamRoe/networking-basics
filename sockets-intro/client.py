@@ -4,10 +4,10 @@
 import socket
 
 HOST = "127.0.0.1"  # The server's hostname or IP address
-PORT = 65432  # The port used by the server
+port_number = 65432  # The port used by the server
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as aSocket:
-    aSocket.connect((HOST, PORT)) # connect the socket to a host and port
+    aSocket.connect((HOST, port_number)) # connect the socket to a host and port
     msg = "Hello, this is the client"
     print("sending to the server: ", msg)
     aSocket.sendall(msg.encode()) # send your message with utf-8 encoding

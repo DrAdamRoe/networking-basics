@@ -1,5 +1,6 @@
-// a low-level client using sockets 
+// a low-level client using sockets
 // adapted from https://www.tutorialspoint.com/unix_sockets/index.htm
+// more documentation in server.c
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,39 +10,29 @@
 
 #include <string.h>
 
-int main(int argc, char *argv[]) {
-   int sockfd, portno, n;
+int main(void) {
+   int port_number, transmission_error;
    struct sockaddr_in serv_addr;
    struct hostent *server;
+   char buffer[256]; // for receiving messages
 
-   char buffer[256];
-
-   if (argc < 3) {
-      fprintf(stderr,"usage %s hostname port\n", argv[0]);
-      exit(0);
-   }
-
-   portno = atoi(argv[2]);
+   port_number = 5001;
 
    /* Create a socket point */
-   sockfd = socket(AF_INET, SOCK_STREAM, 0);
+   int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
    if (sockfd < 0) {
       perror("ERROR opening socket");
       exit(1);
    }
 
-   server = gethostbyname(argv[1]);
+   server = gethostbyname("127.0.0.1");
 
-   if (server == NULL) {
-      fprintf(stderr,"ERROR, no such host\n");
-      exit(0);
-   }
-
+   //TODO: document better
    bzero((char *) &serv_addr, sizeof(serv_addr));
    serv_addr.sin_family = AF_INET;
    bcopy((char *)server->h_addr, (char *)&serv_addr.sin_addr.s_addr, server->h_length);
-   serv_addr.sin_port = htons(portno);
+   serv_addr.sin_port = htons(port_number);
 
    /* Now connect to the server */
    if (connect(sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
@@ -49,31 +40,26 @@ int main(int argc, char *argv[]) {
       exit(1);
    }
 
-   /* Now ask for a message from the user, this message
-      * will be read by server
-   */
+   // message to be send to the server
+   char msg[26] = "Hello, this is the client";
 
-   printf("Please enter the message: ");
-   bzero(buffer,256);
-   fgets(buffer,255,stdin);
+   /* Send message to the server, and capture any errors*/
+   transmission_error = write(sockfd, msg, strlen(msg));
 
-   /* Send message to the server */
-   n = write(sockfd, buffer, strlen(buffer));
-
-   if (n < 0) {
+   if (transmission_error < 0) {
       perror("ERROR writing to socket");
       exit(1);
    }
 
-   /* Now read server response */
+   // Now read server's response into buffer, and capture any errors
    bzero(buffer,256);
-   n = read(sockfd, buffer, 255);
+   transmission_error = read(sockfd, buffer, 255);
 
-   if (n < 0) {
+   if (transmission_error < 0) {
       perror("ERROR reading from socket");
       exit(1);
    }
 
-   printf("%s\n",buffer);
+   printf("Received from server: %s\n",buffer);
    return 0;
 }

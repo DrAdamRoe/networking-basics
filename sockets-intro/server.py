@@ -5,14 +5,14 @@
 import socket
 
 HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
-PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
+port_number = 65432  # Port to listen on (non-privileged ports are > 1023)
 
 # AF_INET: use an IPv4 address
 # SOCK_STREAM: use a stream socket, e.g. TCP
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as aSocket:
-    aSocket.bind((HOST, PORT))
+    aSocket.bind((HOST, port_number))
     aSocket.listen()
-    print("server started at address %s on port %i" % (HOST, PORT))
+    print("server started at address %s on port %i" % (HOST, port_number))
     connection, address = aSocket.accept() ## accept incoming connection
     with connection:
         print("Client connected from: ", address)
@@ -21,5 +21,5 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as aSocket:
             if not data:
                 break
             print("message from client: ", data.decode())
-            msg_response = "server got your data: " + data.decode()
+            msg_response = "server got your message: " + data.decode()
             connection.sendall(msg_response.encode())
