@@ -1,1 +1,14 @@
+## adapted from https://stackoverflow.com/questions/5711120/gitignore-without-binary-files 
+
+# ignore all files
+*
+
+# un-ignore all files with an extension 
+!*.*
+
+# un-ignore all directories 
+!*/
+
+#re-ignore directories we don't want
 others/*
+
