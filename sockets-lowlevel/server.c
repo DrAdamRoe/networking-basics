@@ -15,7 +15,8 @@
 int main( void) {
 
   // the things we'll need
-   int newsockfd, client_addr_length;
+   int newsockfd;
+   unsigned int client_addr_length;
    char buffer[256];
    struct sockaddr_in serv_addr, cli_addr;
    int transmission_error;
