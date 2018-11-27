@@ -1,6 +1,6 @@
 ### adapted from https://github.com/realpython/materials/tree/master/python-sockets-tutorial
 ## and from https://stackoverflow.com/questions/21153262/sending-html-through-python-socket-server
-
+## best source on HTTP standards is of course MDN: https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages 
 import socket
 
 HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
@@ -46,3 +46,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as aSocket:
                 """
             connection.send(http_body.encode())
             connection.close()
+            break 
