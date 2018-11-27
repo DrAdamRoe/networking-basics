@@ -19,14 +19,30 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as aSocket:
                 break
             print("message from client: \n", data.decode())
             print(" -- end message from client -- \n")
-            connection.send('HTTP/1.0 200 OK\n'.encode())
-            connection.send('Content-Type: text/html\n'.encode())
-            connection.send('\n'.encode()) # header and body should be separated by additional newline
-            connection.send("""
+            
+            # the http start-line: HTTP version, Server Response 
+            start_line = "HTTP/1.0 200 OK\n"
+            
+            # The extendable list of HTTP headers
+            headers = "Content-Type: text/html\n"
+
+            # the "head": start-line + headers
+            http_head = start_line + headers
+
+            connection.send(http_head.encode())
+
+            # part of the spec: an empty line between headers and body
+            end_of_metadata = "\n"  
+            connection.send(end_of_metadata.encode())
+
+            # message payload, or body
+            http_body = """
                 <html>
                 <body>
-                <h1>Hello World</h1> this is my server, damnit!
+                <h1>Hello World</h1> 
+                <p>this is my server, hey.</p>
                 </body>
                 </html>
-                """.encode())  # Use triple-quote string.
+                """
+            connection.send(http_body.encode())
             connection.close()
