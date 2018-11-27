@@ -4,7 +4,7 @@
 import socket
 
 HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
-port_number = 65433  # Port to listen on (non-privileged ports are > 1023)
+port_number = 65432  # Port to listen on (non-privileged ports are > 1023)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as aSocket:
     aSocket.bind((HOST, port_number))
@@ -26,24 +26,28 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as aSocket:
             # The extendable list of HTTP headers
             headers = "Content-Type: text/html\n"
 
-            # the "head": start-line + headers
-            http_head = start_line + headers
-
-            connection.send(http_head.encode())
-
-            # part of the spec: an empty line between headers and body
-            end_of_metadata = "\n"  
-            connection.send(end_of_metadata.encode())
+            end_of_metadata="\n"
 
             # message payload, or body
             http_body = """
-                <html>
-                <body>
-                <h1>Hello World</h1> 
-                <p>this is my server, hey.</p>
-                </body>
-                </html>
-                """
-            connection.send(http_body.encode())
+<html>
+<body>
+<h1>Hello World</h1> 
+<p>this is my server, hey.</p>
+</body>
+</html>
+"""
+
+            headers += "Content-Length: %i\n" % len(http_body.encode())
+           
+            # the "head": start-line + headers
+            http_head = start_line + headers
+        
+            # send all components: head, end of head signal, body
+            connection.send((http_head + end_of_metadata + http_body).encode())
+
+            # close connection
             connection.close()
+
+            # kill server
             break 
