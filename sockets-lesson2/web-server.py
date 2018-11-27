@@ -4,28 +4,29 @@
 import socket
 
 HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
-port_number = 65432  # Port to listen on (non-privileged ports are > 1023)
+port_number = 65433  # Port to listen on (non-privileged ports are > 1023)
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind((HOST, port_number))
-    s.listen()
-    conn, addr = s.accept()
-    with conn:
-        print("Connected by", addr)
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as aSocket:
+    aSocket.bind((HOST, port_number))
+    aSocket.listen()
+    print("server started at address %s on port %i" % (HOST, port_number))
+    connection, address = aSocket.accept()
+    with connection:
+        print("Client connected from: ", address)
         while True:
-            data = conn.recv(1024)
+            data = connection.recv(1024)
             if not data:
                 break
-            print(data)
-            #conn.sendall(data)
-            conn.send('HTTP/1.0 200 OK\n')
-            conn.send('Content-Type: text/html\n')
-            conn.send('\n') # header and body should be separated by additional newline
-            conn.send("""
+            print("message from client: \n", data.decode())
+            print(" -- end message from client -- \n")
+            connection.send('HTTP/1.0 200 OK\n'.encode())
+            connection.send('Content-Type: text/html\n'.encode())
+            connection.send('\n'.encode()) # header and body should be separated by additional newline
+            connection.send("""
                 <html>
                 <body>
-                <h1>Hello World</h1> this is my server!
+                <h1>Hello World</h1> this is my server, damnit!
                 </body>
                 </html>
-                """) # Use triple-quote string.
-            conn.close()
+                """.encode())  # Use triple-quote string.
+            connection.close()
