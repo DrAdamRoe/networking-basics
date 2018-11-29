@@ -22,4 +22,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as aSocket:
                 break
             print("message from client: ", data.decode())
             msg_response = "server got your message: " + data.decode()
-            connection.sendall(msg_response.encode())
+            connection.send(msg_response.encode())
