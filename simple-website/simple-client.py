@@ -1,17 +1,17 @@
-### adapted from https://github.com/realpython/materials/tree/master/python-sockets-tutorial
-## more resources in server.py
 
-import socket
+import http.client
 
-HOST = "127.0.0.1"  # The server's hostname or IP address
-port_number = 8001  # The port used by the server
+# create the connection to the server
+connection = http.client.HTTPConnection("127.0.0.1" , 8005)
 
+# send a get request to the server
+connection.request("GET","/")
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as aSocket:
-    aSocket.connect((HOST, port_number)) # connect the socket to a host and port
-    msg = "GET / HTTP/1.0"
-    print("sending to the server: ", msg)
-    aSocket.sendall(msg.encode()) # send your message with utf-8 encoding
-    data = aSocket.recv(1024)  # wait for a response
+# get the response object
+response = connection.getresponse()
 
-print("Received from server: ", data.decode()) #print response
+# print the server status
+print(response.status, response.reason)
+
+# print the http body, e.g. the html
+print(response.read().decode())
