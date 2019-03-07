@@ -2,7 +2,7 @@
 import http.client
 
 # create the connection to the server
-connection = http.client.HTTPConnection("127.0.0.1" , 8005)
+connection = http.client.HTTPConnection("127.0.0.1" , 65432)
 
 # send a get request to the server
 connection.request("GET","/")
