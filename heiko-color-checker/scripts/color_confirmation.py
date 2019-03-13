@@ -41,7 +41,7 @@ print("""
 <p>
 %s
 </p>
-<a href="index.html">Go Home</a>
+<a href="../index.html">Go Home</a>
 </body>
 </html>
 """ % message)
