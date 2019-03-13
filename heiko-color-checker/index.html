@@ -1,0 +1,22 @@
+<html>
+<head>
+  <title>A super simple python CGI server</title>
+</head>
+<body>
+
+<p>
+This amazing Program will check if a certain color exists
+</p>
+<br>
+<p>
+  uscase: enter any name (you can also include spaces) of a color or the hex number starting with '#'
+</p>
+<form action="/scripts/parseForm.py" method="post">
+<p>
+  <label for="Name">Enter a color: </label>
+  <input type="text" id="Name" name="color" required>
+  <input type="submit" value="Send">
+</p>
+</form>
+</body>
+</html>
