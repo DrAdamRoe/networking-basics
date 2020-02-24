@@ -9,7 +9,7 @@ You will need to have python 3 installed on your computer.
 To check that you have a working install of python 3, execute `sanity/check.py`, you should see the following:
 
 ```
-$ python sanity/check.py
+$ python3 sanity/check.py
 You are sane. Whew.
 ```
 
