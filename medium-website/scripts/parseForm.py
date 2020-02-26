@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/env python3
 
 # A simple script to accept input from an html form,
 # parse the information, and do something - which in this case
