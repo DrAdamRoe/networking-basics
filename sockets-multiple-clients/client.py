@@ -30,3 +30,5 @@ send("Hello World!")
 send("Hello World!")
 input()
 send(DISCONNECT_MESSAGE)
+
+# run python client.py in about 3 seperate terminals
