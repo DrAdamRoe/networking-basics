@@ -25,13 +25,14 @@ It should be running now. It will look like it is hanging, because it is running
 
 The first way to do this is to use everybody's favorite web client, the browser. Type in `http://localhost:3000/`to the URL bar and hit enter. You have made a request to your own server, and you should get a response that says "Hello, World" rendered in the browser. Congratulations! 
 
-Now go to your terminal where you ran the server and try to read through the log messages. What do you see? 
+While the server is running in one terminal, open up a second terminal (ideally side-by-side) and run the command-line based client. This will make a request to your server similar to what a browser does, but from the command line:
 
-While we are here, you can try a different way of sending messages to your server: open a new terminal and use the command cURL (client URL) to make a request of your server: 
+`> node client.js`
 
-`> curl localhost:3000`
+You should see some output in both terminals, including our message "Hello World" in the client terminal. 
+  
+ ![Running the server and client locally](./img/hello_web_setup.png) A VS Code window with the files `server.js` and `client.js` being displayed (top) and executed in the terminal (bottom).
 
-You should see similar output (Hello World) in your terminal. If you don't have curl installed, just skip this step for now. 
 
 ##### Lesson 1: Client, Server, Sockets, Ports
 
