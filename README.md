@@ -14,8 +14,8 @@ Students joining this workshop are expected to have:
 
 To start, clone this repository into a working directory on your computer and open it in your code editor. You can do this by opening a New Window in Visual Studio Code selecting "Clone Git Repository", entering the URL of this repository (copied from your browser), and then selecting a local directory to save it to. You can also download this repository as a .zip file instead and open it from the downloads folder. 
 
-### Lesson 0: Hello, Web! 
-In this lesson, we'll start our first web server. 
+## Lesson 0: Hello, Web! 
+In this lesson, we'll start our first web server and connect to it a few ways.  
 
 Navigate to the directory `0_hello_web` in your terminal and run the server using node.js:
 
@@ -30,9 +30,25 @@ While the server is running in one terminal, open up a second terminal (ideally 
 `> node client.js`
 
 You should see some output in both terminals, including our message "Hello World" in the client terminal. 
-  
+ 
+ 
  ![Running the server and client locally](./img/hello_web_setup.png) A VS Code window with the files `server.js` and `client.js` being displayed (top) and executed in the terminal (bottom).
 
+#### Optional: A Python Client with a JavaScript Server
+If you have a working version of Python 3 installed, the following little exercise can really help to understand the magic of networking. So far, we have run both a client and server using node.js (JavaScript). We also used the browser as a client without looking under the hood. Now, we'll explicitly use Python as our client, to demonstrate that communicating over a network is independent of programming language. 
+
+In one terminal, start your server again (`node server.js`). In another terminal window, navigate to the folder called `sockets-intro`, where you will find a file called `server.py`file and one called `client.py`. With the node server running in one terminal window, start the python client in another window, by running
+
+`> python client.py`
+
+As with the previous exercise, the client is sending a message to the server, and gettin a response. Here, we see that the data itself is exchanged and the programming language can interpret that data, but it does not matter which language you use. You can also swap this around, running the server in python and the client in JavaScript, for example. A further example in the directory `sockets-lowlevel`shows the same in the C programming language. 
+
+
+### Ports and Sockets
+
+The first thing we really want to learn about is how ports and sockets work. To see this in action, we will change the port that the server listens on, and the port that the various clients we have connect to. 
+
+To do this, stop your server by typing Ctrl+C in its terminal window. Now, edit the file `server.js` to listen on an another port, for example, 3001 instead of 3000. Now, try to connect to the server *without* yet changing the port, for example, by navigating to `localhost:3000` in your browser or by running `node client.js`as it is. In either case, you should get an error on the client and you should not see any requests getting to the server. This is because you are still making a request on port 3000, but you have nothing listening there. Now, change the port in your client to make a request on your new port (for example, 3001). You should see the "Hello World" message once again. 
 
 ##### Lesson 1: Client, Server, Sockets, Ports
 
