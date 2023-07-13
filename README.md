@@ -1,29 +1,18 @@
-### Networking Introduction for Programmers
+# Networking Introduction for Programmers
 
-This repository is meant to accompany lectures given at C<>DE University.
+This repository is meant to accompany lectures given at C<>DE University. This repository contains many versions of low-level servers and clients, intended to demonstrate various principles of how web servers work, including sockets, HTTP requests, file servers, etc. 
 
-##### Lesson 0: Python Installation (check)
+## Before We Begin...
 
-You will need to have python 3 installed on your computer.
+Students joining this workshop are expected to have:
+- An interest in learning how the internet works
+- Basic familiarity with the terminal and command line on your own computer (e.g. navigating directories, executing scripts)
+- Node.js installed on your computer (ideally v18, but v16 or v20 is OK)
+- Optional: Python3 installed on your computer (v3.8 or higher)
+- Optional: git installed on your own computer, and the ability to clone a repository (nothing advanced required).
+- A code editor / integrated development environment installed locally on your computer (e.g. Visual Studio Code).
 
-To check that you have a working install of python 3, execute `sanity/check.py`, you should see the following:
-
-```
-$ python3 sanity/check.py
-You are sane. Whew.
-```
-
-If, instead, you see something like this, you are not using Python 3:
-
-```
-$ python sanity/check.py
-
-insane!
-
-This requires Python 3.x. You are using version 2.7
-```
-
-You may Python 3 installed and need to specify it (e.g. `python3 sanity/check.py`), or you may need to [Install Python 3](https://realpython.com/installing-python/).
+To start, clone this repository into a working directory on your computer and open it in your code editor. You can do this by opening a New Window in Visual Studio Code selecting "Clone Git Repository", entering the URL of this repository (copied from your browser), and then selecting a local directory to save it to. You can also download this repository as a .zip file instead and open it from the downloads folder. 
 
 ##### Lesson 1: Client, Server, Sockets, Ports
 
