@@ -18,10 +18,11 @@ int main( void) {
    int newsockfd;
    unsigned int client_addr_length;
    char buffer[256];
+   char response[256] = "server got your message: ";
    struct sockaddr_in serv_addr, cli_addr;
    int transmission_error;
 
-   int port_number = 5001;
+   int port_number = 3000;
 
    /* Initialize socket structure. Explicitly clears out memory at the
        address of the server
@@ -92,7 +93,8 @@ int main( void) {
 
    /* respond to client */
    //TODO: msg_response = "server got your message: " + data.decode()
-   transmission_error = write(newsockfd,"server got your message: ",128);
+   strcat(response, buffer);
+   transmission_error = write(newsockfd, response, 128);
 
    if (transmission_error < 0) {
       perror("ERROR writing to socket");

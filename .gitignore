@@ -5,6 +5,9 @@
 # un-ignore all files with an extension 
 !*.*
 
+# ignore any files from compiling c
+*.out
+
 # un-ignore all directories 
 !*/
 

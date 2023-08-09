@@ -1,6 +1,6 @@
-# Networking Introduction for Programmers
+# How Networks Work, And Don't
 
-This repository is meant to accompany lectures given at C<>DE University. This repository contains many versions of low-level servers and clients, intended to demonstrate various principles of how web servers work, including sockets, HTTP requests, file servers, etc. 
+This repository is meant to accompany classes at C<>DE University. This repository contains many versions of low-level servers and clients, intended to demonstrate various principles of how web servers work, including sockets, HTTP requests, file servers, etc. 
 
 ## Before We Begin...
 
@@ -14,10 +14,10 @@ Students joining this workshop are expected to have:
 
 To start, clone this repository into a working directory on your computer and open it in your code editor. You can do this by opening a New Window in Visual Studio Code selecting "Clone Git Repository", entering the URL of this repository (copied from your browser), and then selecting a local directory to save it to. You can also download this repository as a .zip file instead and open it from the downloads folder. 
 
-## Lesson 0: Hello, Web! 
-In this lesson, we'll start our first web server and connect to it a few ways.  
+## The Client and the Server  
+In this lesson, we'll start our first web server and connect to it a few ways on our own computer. After you have downloaded this repository, you can disconnect from the internet. 
 
-Navigate to the directory `0_hello_web` in your terminal and run the server using node.js:
+Navigate to the directory `example-js` in your terminal and run the server using node.js:
 
 `> node server.js`
 
@@ -37,13 +37,24 @@ You should see some output in both terminals, including our message "Hello World
 #### Optional: A Python Client with a JavaScript Server
 If you have a working version of Python 3 installed, the following little exercise can really help to understand the magic of networking. So far, we have run both a client and server using node.js (JavaScript). We also used the browser as a client without looking under the hood. Now, we'll explicitly use Python as our client, to demonstrate that communicating over a network is independent of programming language. 
 
-In one terminal, start your server again (`node server.js`). In another terminal window, navigate to the folder called `sockets-intro`, where you will find a file called `server.py`file and one called `client.py`. With the node server running in one terminal window, start the python client in another window, by running
+In one terminal, start your server again (`node server.js`). In another terminal window, navigate to the folder called `example-py`, where you will find a file called `server.py`file and one called `client.py`. With the node server running in one terminal window, start the python client in another window, by running
 
 `> python client.py`
 
-As with the previous exercise, the client is sending a message to the server, and gettin a response. Here, we see that the data itself is exchanged and the programming language can interpret that data, but it does not matter which language you use. You can also swap this around, running the server in python and the client in JavaScript, for example. A further example in the directory `sockets-lowlevel`shows the same in the C programming language. 
+As with the previous exercise, the client is sending a message to the server, and getting a response. Here, we see that the data itself is exchanged and the programming language can interpret that data, but it does not matter which language you use. You can also swap this around, running the server in python and the client in JavaScript, for example.
 
+A further example in the directory `example-c`shows the same in the C programming language. If you use this version, you will have to compile the code first, and after any change. On my computer (MacBook set up with Xtools), I can compile with: 
 
+`gcc server.c -o server.out``
+
+and
+
+`gcc client.c -o client.out`
+
+And then start the server and client respectively with `./server.out` and `./client.out`. 
+
+All three versions (JavaScript, Python, and C) should be fully interoperable: you should be able to start a server with any of the three, and connect with any of the three clients, as long as the socket (combination of IP Address and Port) is the same in both files. 
+ 
 ### Ports and Sockets
 
 The first thing we really want to learn about is how ports and sockets work. To see this in action, we will change the port that the server listens on, and the port that the various clients we have connect to. 

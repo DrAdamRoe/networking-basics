@@ -18,7 +18,7 @@ int main(void) {
    struct hostent *server;
    char buffer[256]; // for receiving messages
 
-   port_number = 5001;
+   port_number = 3000;
 
    /* Create a socket point */
    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
