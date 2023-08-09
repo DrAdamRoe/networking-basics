@@ -11,5 +11,5 @@ function handleConnection(socket) {
     console.log(chunk.toString());
   });
 
-  socket.write("Server got your message");
+  socket.write("HTTP/1.1 200 OK\nContent-Length: 11\n\nHello World");
 }
