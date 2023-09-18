@@ -4,7 +4,7 @@
 
 import socket
 
-HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
+HOST = "0.0.0.0"  # Standard loopback interface address (localhost)
 port_number = 3000  # Port to listen on (non-privileged ports are > 1023)
 
 # AF_INET: use an IPv4 address
