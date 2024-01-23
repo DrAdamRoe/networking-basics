@@ -7,7 +7,7 @@ This repository is meant to accompany classes at C<>DE University. This reposito
 Students joining this workshop are expected to have:
 - An interest in learning how the internet works
 - Basic familiarity with the terminal and command line on your own computer (e.g. navigating directories, executing scripts)
-- Node.js installed on your computer (ideally v18, but v16 or v20 is OK)
+- Node.js installed on your computer (ideally v20 LTS, but v18 is OK)
 - Optional: Python3 installed on your computer (v3.8 or higher)
 - Optional: git installed on your own computer, and the ability to clone a repository (nothing advanced required).
 - A code editor / integrated development environment installed locally on your computer (e.g. Visual Studio Code).
