@@ -1,15 +1,15 @@
 const net = require("net");
 const server = net.createServer();
 
-server.on("connection", handleConnection);
-server.listen({ host:"0.0.0.0", port: 3000 });
-console.log("Server is ready! Listening…")
+server.listen({ host: "0.0.0.0", port: 3000 });
 
-function handleConnection(socket) {
+handleConnection = (socket) => {
   socket.on("data", (chunk) => {
-    console.log("Received chunk: ");
-    console.log(chunk.toString());
+    console.log("Received chunk: " + chunk.toString());
+    socket.write("Server got your message", () => server.close());
   });
-
-  socket.write("Server got your message");
 }
+
+server.on("connection", handleConnection);
+
+console.log("Server is ready! Listening…");
