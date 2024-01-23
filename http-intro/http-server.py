@@ -21,30 +21,30 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as aSocket:
             print(" -- end message from client -- \n")
             
             # the http start-line: HTTP version, Server Response 
-            start_line = "HTTP/1.0 200 OK\n"
+            http_status_code = "HTTP/1.0 200 OK\n"
             
             # The extendable list of HTTP headers
-            headers = "Content-Type: text/html\n"
+            http_headers = "Content-Type: text/html\n"
 
-            end_of_metadata="\n"
+            http_end_of_metadata="\n"
 
             # message payload, or body
             http_body = """
 <html>
-<body>
-<h1>Hello World</h1> 
-<p>this is my server, hey.</p>
-</body>
+    <body>
+        <h1>Hello World</h1> 
+        <p>this is my server, hey.</p>
+    </body>
 </html>
 """
 
-            headers += "Content-Length: %i\n" % len(http_body.encode())
+            http_headers += "Content-Length: %i\n" % len(http_body.encode())
            
             # the "head": start-line + headers
-            http_head = start_line + headers
+            http_head = http_status_code + http_headers
         
             # send all components: head, end of head signal, body
-            connection.send((http_head + end_of_metadata + http_body).encode())
+            connection.send((http_head + http_end_of_metadata + http_body).encode())
 
             # close connection
             connection.close()
