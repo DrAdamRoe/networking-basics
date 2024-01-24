@@ -1,13 +1,13 @@
 const net = require("net");
 const server = net.createServer();
 
-//define HTTP response 
-const http_status_code = `HTTP/1.0 200 OK\n`
-            
-//The extendable list of HTTP headers
-const http_headers = `Content-Type: text/html\n`
+//define HTTP response
+const http_status_code = "HTTP/1.0 200 OK\n";
 
-const http_end_of_metadata=`\n`
+//The extendable list of HTTP headers
+const http_headers = "Content-Type: text/html\n";
+
+const http_end_of_metadata="\n";
 
 //message payload, or body
 const http_body = `
@@ -17,7 +17,8 @@ const http_body = `
     <p>this is my server, hey.</p>
   </body>
 </html>
-`
+`;
+
 const http_response = http_status_code + http_headers + http_end_of_metadata + http_body;
 
 server.listen({ host:"localhost", port: 3000 });
@@ -31,4 +32,4 @@ handleConnection = (socket) => {
 
 server.on("connection", handleConnection);
 
-console.log("Server is ready! Listening…");
+console.log("Server is ready! Listening ...");
