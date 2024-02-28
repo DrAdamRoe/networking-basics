@@ -21,12 +21,12 @@ const http_body = `
 
 const http_response = http_status_code + http_headers + http_end_of_metadata + http_body;
 
-server.listen({ host:"localhost", port: 3000 });
+server.listen({ host:"0.0.0.0", port: 3000 });
 
 handleConnection = (socket) => {
   socket.on("data", (chunk) => {
     console.log("Received chunk: " + chunk.toString());
-    socket.write(http_response);
+    socket.write(http_response, () => socket.end());
   });
 };
 
